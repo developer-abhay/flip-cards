@@ -40,16 +40,20 @@ const gridSize = 4;
 container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
 
 // Selecting from image array
+let tempImg = [...images];
 const items = [];
-for (let i = 0; i < gridSize * 2; i++) {
-  const randomNum = Math.floor(Math.random() * gridSize * 2);
 
-  //   if (!items.includes(images[randomNum])) {
-  items.push(images[randomNum]);
-  //   } else if (!items.includes(images[randomNum + 1])) {
-  // items.push(images[randomNum + 1]);
-  //   }
+for (let i = 0; i < (gridSize * gridSize) / 2; i++) {
+  const randomNum = Math.floor(Math.random() * tempImg.length);
+
+  items.push(tempImg[randomNum]);
+  tempImg = tempImg.filter((item) => {
+    return item.name !== tempImg[randomNum].name;
+  });
+  console.log(tempImg);
 }
+
+console.log(items);
 
 // Shuffling and rendering the final items
 const finalItems = [...items, ...items];
